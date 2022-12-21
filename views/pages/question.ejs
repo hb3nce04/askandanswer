@@ -1,0 +1,72 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Főoldal</a></li>
+      <li class="breadcrumb-item"><a href="/categories/<%=question.Topic.Category.id%>"><%=question.Topic.Category.name%></a></li>
+      <li class="breadcrumb-item"><a href="/topics/<%=question.Topic.id%>"><%=question.Topic.name%></a></li>
+      <li class="breadcrumb-item active" aria-current="page"><%=question.title%></li>
+    </ol>
+</nav>
+<div class="shadow mb-3 card">
+    <h3 class="card-header text-center"><%= question.title %></h3>
+    <div class="card-body"><%= question.text %></div>
+    <div class="card-footer text-muted">    
+        <%=question.User.username%> kérdése, <%=moment(question.time).calendar()%>
+    </div>
+</div>
+<% if(question.Answers.length > 0) { %>
+    <% question.Answers.forEach((answer, index) => { %>
+        <div class="border border-gray border-1 shadow-sm my-3 card">
+            <div class="card-header">
+                <span class="badge bg-dark rounded-pill h-auto my-auto">
+                    <%=(index+1) + ((currentPage-1)*10)%>/<%=numberOfAnswers%>
+                </span>
+                <span class="text-primary"><%= answer.User.username %> </span> válasza:
+            </div>
+            <div class="card-body"><%= answer.text %></div>
+            <div class="card-footer text-muted">
+                <%=moment(answer.time).calendar()%>
+            </div>
+        </div>
+    <% }); %>
+<% } else { %>
+    <h5>Ehhez a kérdéshez még nem érkezett válasz!</h5>
+<% } %>
+<% if (numberOfPages > 1) { %>
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a href="" class="page-link">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+            <% for (let i = 1; i <= numberOfPages; i++) { %>
+                <li class="page-item">
+                    <a href="?page=<%=i%>" class="page-link"><%=i%></a>
+                </li>
+            <% } %>
+            <li class="page-item">
+                <a href="" class="page-link">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+<% } %>
+<% if(locals.username) { %>
+    <div class="border border-primary border-1 shadow my-3 card">
+        <div class="card-body">
+            <h5 class="text-center">Válaszolj a kérdésre:</h5>
+            <form action="/api/questions/<%= question.id %>" method="POST">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" name="answer"></textarea>
+                    <label for="floatingTextarea">Válaszod</label>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">Elküldés</button>
+            </form>
+        </div>
+    </div>
+<% } else { %>
+    <div class="border border-danger border-1 shadow my-3 card">
+        <div class="card-body">A kérdésre nem tudsz válaszolni, mert nem vagy bejelentkezve.</div>
+    </div>
+<% } %>

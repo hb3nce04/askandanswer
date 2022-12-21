@@ -1,0 +1,17 @@
+/ -> /questions
+
+/profile
+/questions
+/questions/:id
+/questions/new
+/categories:id
+/topics:id
+
+API
+/api/questions/random - GET - random kérdés generálása
+/api/questions/:id - POST - válasz a kérdésre
+/api/questions/new - POST - kérdés kiírása
+
+/api/user/login - POST
+/api/user/register - POST
+/api/user/logout

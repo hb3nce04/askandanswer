@@ -1,0 +1,33 @@
+{
+    "name": "webapp_qanda",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "app.js",
+    "scripts": {
+        "prod": "SET NODE_ENV=production && nodemon app.js",
+        "dev": "SET NODE_ENV=development && nodemon app.js"
+    },
+    "author": "b3nce04",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "body-parser": "^1.20.1",
+        "connect-flash": "^0.1.1",
+        "dotenv": "^16.0.3",
+        "ejs": "^3.1.8",
+        "express": "^4.18.2",
+        "express-ejs-layouts": "^2.5.1",
+        "express-mysql-session": "^2.1.8",
+        "express-session": "^1.17.3",
+        "moment": "^2.29.4",
+        "mysql2": "^2.3.3",
+        "nodemon": "^2.0.20",
+        "passport": "^0.6.0",
+        "passport-local": "^1.0.0",
+        "sequelize": "^6.27.0"
+    },
+    "nodemonConfig": {
+        "ext": "js,ejs"
+    }
+}

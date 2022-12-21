@@ -1,0 +1,40 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Főoldal</a></li>
+      <li class="breadcrumb-item active"><a href="/categories/<%=topic.Category.id%>"><%=topic.Category.name%></a></li>
+      <li class="breadcrumb-item active"><a><%=topic.name%></a></li>
+    </ol>
+</nav>
+<% if (questions.length > 0) { %>
+    <h3 class="text-center">Legfrissebb kérdések <%= topic.name.toLowerCase() %> témában:</h3>
+    <% questions.forEach(question => { %>
+        <a href="/questions/<%=question.id%>" class="p-2 bg-white d-flex justify-content-between align-items-start my-2 link shadow-sm">
+            <div class="d-flex flex-column">
+                <b><%= question.title %></b>
+            </div>
+        </a>
+    <% }); %>
+    <% if (numberOfPages > 1) { %>
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a href="" class="page-link">
+                        <span>&laquo;</span>
+                    </a>
+                </li>
+                <% for (let i = 1; i <= numberOfPages; i++) { %>
+                    <li class="page-item">
+                        <a href="?page=<%=i%>" class="page-link"><%=i%></a>
+                    </li>
+                <% } %>
+                <li class="page-item">
+                    <a href="" class="page-link">
+                        <span>&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    <% } %>
+<% } else { %>
+    <h5 class="text-center p-2">Jelenleg <%= topic.name.toLowerCase() %> témához nem tartozik egyetlen egy kérdés sem!</h5>
+<% } %>

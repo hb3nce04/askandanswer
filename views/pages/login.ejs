@@ -1,0 +1,60 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Főoldal</a></li>
+        <li class="breadcrumb-item active">Bejelentkezés, regisztráció</li>
+    </ol>
+</nav>
+<h3 class="text-center mb-3">Bejelentkezés vagy regisztráció</h3>
+<% if(locals.message.length > 0) { %>
+    <div class="alert alert-primary p-2" role="alert"><%= message %></div>
+<% } %>
+<div class="row">
+    <div class="col-5">
+        <h5 class="text-center">Regisztráció</h5>
+        <form method="POST" action="/api/user/register">
+            <div class="p-2">
+                <div class="mb-2 input-group-sm">
+                    <label for="usernameInput" class="form-label">Felhasználónév</label>
+                    <input type="username" class="form-control" name="username" autofocus required>
+                </div>
+                <div class="mb-2 input-group-sm">
+                    <label for="passwordInput" class="form-label">Jelszó</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="mb-2 input-group-sm">
+                    <label for="passwordInput" class="form-label">Jelszó mégegyszer</label>
+                    <input type="password" class="form-control" name="password2" required>
+                </div>
+                <div class="mb-2 input-group-sm">
+                    <label for="emailInput" class="form-label">E-mail cím</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <button type="submit" class="btn btn btn-sm btn-outline-primary w-100 mt-2">Regisztráció</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-4">
+        <h5 class="text-center">Bejelentkezés</h5>
+        <form method="POST" action="/api/user/login">
+            <div class="p-2">
+                <div class="mb-2 input-group-sm">
+                    <label for="usernameInput" class="form-label">Felhasználónév</label>
+                    <input type="username" class="form-control" name="username" autofocus required>
+                </div>
+                <div class="mb-2 input-group-sm">
+                    <label for="passwordInput" class="form-label">Jelszó</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary w-100 mt-2">Bejelentkezés</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-3">
+        <h5 class="text-center">Szabályok az oldalon</h5>
+        <ul>
+            <li>egy</li>
+            <li>kettő</li>
+            <li>három</li>
+        </ul>
+    </div>
+</div>

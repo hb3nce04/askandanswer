@@ -1,0 +1,27 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Főoldal</li>
+    </ol>
+</nav>
+<h2 class="text-center">Üdvözlünk az oldalon látogató!</h2>
+<h3 class="text-center">Legfrissebb kérdések</h3>
+<% categories.forEach(category=> { %>
+    <% if(category.questions.length > 0) { %>
+        <h5 class="my-2 pb-1 border-bottom border-primary border-3 rounded-start">
+            <%= category.name %>
+        </h5>
+        <% category.questions.forEach(question=> { %>
+            <a class="p-2 bg-white d-flex justify-content-between my-2 shadow-sm link" href="questions/<%= question.id %>">
+                <div class="d-flex flex-column">
+                    <b>
+                        <%= question.title %>
+                    </b>
+                    <span class="text-primary d-inline"><%= question.Topic.name %></span>
+                </div>
+                <span class="badge bg-light text-black rounded-pill my-auto">
+                    <%= question.Answers.length %>
+                </span>
+            </a>
+        <% }); %>
+    <%}%>
+<% }); %>

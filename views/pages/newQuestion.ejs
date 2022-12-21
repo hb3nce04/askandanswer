@@ -1,0 +1,36 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Főoldal</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Új kérdés</li>
+    </ol>
+</nav>
+<h3 class="text-center">Új kérdés</h3>
+<%if (categoryId == null && topicId == null) { %>
+    <h4>Kategória:</h4>
+    <form action="/questions/new" method="GET">
+        <select class="form-select" aria-label="Default select example" name="category">
+            <% categoryList.forEach(element=> { %>
+                <option value="<%=element.id%>"><%=element.name%></option>
+            <% }) %>
+        </select>
+        <button class="btn btn-primary mt-2 w-100">Tovább</button>
+    </form>
+<% } else { %>
+    <%if (topicId == null) { %>
+        <h4>Kategória: <%=categoryList[categoryId-1].name%></h4>
+        <h4>Téma:</h4>
+        <form action="/questions/new" method="GET">
+            <select class="form-select" aria-label="Default select example" name="topic">
+                <% topicList.forEach(element=> { %>
+                    <option value="<%=element.id%>"><%=element.name%></option>
+                <% }) %>
+            </select>
+            <a href="/questions/new" class="btn btn-gray mt-2 w-100">Vissza</a>
+            <button class="btn btn-primary mt-2 w-100">Tovább</button>
+        </form>
+    <% } else { %>
+        <h1><%=topicId%></h1>
+    <% } %>
+<% } %>
+
+Kell még egy kategória - téma rész is
