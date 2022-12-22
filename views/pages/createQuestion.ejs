@@ -1,0 +1,70 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Főoldal</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Új kérdés</li>
+    </ol>
+</nav>
+<h3 class="text-center">Új kérdés</h3>
+<form action="/api/questions/create" method="POST">
+    <div class="mt-2">
+        <h4 class="text-muted">Kategória:</h4>
+        <select onchange="setTopicList()" class="form-select" aria-label="Default select example" id="categorySelect">
+            <option value="0">
+                Válassz
+            </option>
+        </select>
+    </div>
+    <div class="mt-2">
+        <h4 class="text-muted">Téma:</h4>
+        <select class="form-select" aria-label="Default select example" id="topicSelect" name="topicId">
+            <option value="0">
+                Válassz
+            </option>
+        </select>
+    </div>
+    <div class="form-group mt-2">
+        <h4 class="text-muted">Kérdésed:</h4>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email" name="title">
+        <small id="emailHelp" class="form-text text-muted">Bátrann kérdezz, de a leírásban fejtsd ki!</small>
+    </div>
+    <div class="form-floating mt-2">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="text"></textarea>
+        <label for="floatingTextarea2">Kérdés leírása, bővebb kifejtése</label>
+    </div>
+    <button class="btn btn-primary mt-2 w-100">Kérdés kiírása</button>  
+</form>
+
+<script>
+    var $categorySelect = $("#categorySelect");
+    var $topicSelect = $("#topicSelect");
+    var categoryList = JSON.parse('<%- JSON.stringify(categoryList) %>')
+    var topicList = JSON.parse('<%- JSON.stringify(topicList) %>')
+    var currentList = topicList.filter((value) => {
+                        return value.CategoryId === 1
+                    })
+
+    $categorySelect.empty();
+    $.each(categoryList, function(key,value) {
+    $categorySelect.append(
+        $("<option></option>").attr("value", value.id).text(value.name));
+    });
+
+    $topicSelect.empty();
+    $.each(currentList, function(key,value) {
+    $topicSelect.append(
+        $("<option></option>").attr("value", value.id).text(value.name));
+    });
+
+    const setTopicList = () => {
+        const selectedCategory = $( "#categorySelect" ).val();
+        currentList = topicList.filter((value) => {
+                        return value.CategoryId == selectedCategory
+                    })
+        $topicSelect.empty();
+        $.each(currentList, function(key,value) {
+        $topicSelect.append(
+            $("<option></option>").attr("value", value.id).text(value.name));
+        });
+    }
+</script>

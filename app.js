@@ -18,6 +18,7 @@ import profileRoutes from './routes/profile.js';
 
 import userAPIRoutes from './routes/api/user.js';
 import questionsAPIRoutes from './routes/api/questions.js';
+import answersAPIRoutes from './routes/api/answers.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -63,6 +64,7 @@ app.use('/profile', profileRoutes);
 
 app.use('/api/user', userAPIRoutes);
 app.use('/api/questions', questionsAPIRoutes);
+app.use('/api/answers', answersAPIRoutes);
 
 app.use((req, res, next) => {
 	res.render("pages/404");

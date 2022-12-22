@@ -52,6 +52,8 @@ const getQuestionById = async (req, res) => {
 		numberOfAnswers: answers,
 		numberOfPages: 1 + parseInt(answers / 10),
 		currentPage: page,
+		userId: req.user.id,
+		isOwnQuestion: req.user.id === question.UserId
 	});
 };
 

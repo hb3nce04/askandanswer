@@ -7,7 +7,12 @@
     </ol>
 </nav>
 <div class="shadow mb-3 card">
-    <h3 class="card-header text-center"><%= question.title %></h3>
+    <h3 class="card-header text-center">
+        <%= question.title %> 
+        <% if(isOwnQuestion) { %>
+            <a href="/api/questions/delete/<%=question.id%>" type="button" class="btn btn-light">Kérdés törlése</a>
+        <% } %>
+    </h3>
     <div class="card-body"><%= question.text %></div>
     <div class="card-footer text-muted">    
         <%=question.User.username%> kérdése, <%=moment(question.time).calendar()%>
@@ -25,6 +30,9 @@
             <div class="card-body"><%= answer.text %></div>
             <div class="card-footer text-muted">
                 <%=moment(answer.time).calendar()%>
+                <% if(answer.User.id === userId) { %>
+                    <a href="/api/answers/delete/<%=answer.id%>">Válaszod törlése</a>
+                <% } %>
             </div>
         </div>
     <% }); %>
@@ -55,8 +63,8 @@
 <% if(locals.username) { %>
     <div class="border border-primary border-1 shadow my-3 card">
         <div class="card-body">
-            <h5 class="text-center">Válaszolj a kérdésre:</h5>
-            <form action="/api/questions/<%= question.id %>" method="POST">
+            <h5 class="text-center">Szólj hozzá:</h5>
+            <form action="/api/answers/<%= question.id %>" method="POST">
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" name="answer"></textarea>
                     <label for="floatingTextarea">Válaszod</label>

@@ -3,14 +3,17 @@
 /profile
 /questions
 /questions/:id
-/questions/new
+/questions/create
 /categories:id
-/topics:idf
+/topics:id
 
 API
 /api/questions/random - GET - random kérdés generálása
 /api/questions/:id - POST - válasz a kérdésre
-/api/questions/new - POST - kérdés kiírása
+/api/questions/delete/:id - GET - kérdés törlése (be vagyunk jelentkezve + saját kérdés) (kérdés id)
+
+/api/answers/:id - POST - válasz írása (kérdés id)
+/api/answers/delete/:id - GET - válasz törlése (válasz id)
 
 /api/user/login - POST
 /api/user/register - POST
