@@ -5,7 +5,7 @@
 /questions/:id
 /questions/new
 /categories:id
-/topics:id
+/topics:idf
 
 API
 /api/questions/random - GET - random kérdés generálása
